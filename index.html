@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Falviro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#f8f5f1;
+      color:#2e2e2e;
+      line-height:1.6;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:25px 8%;
+      background:white;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+    }
+
+    .logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2rem;
+      font-weight:700;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:#444;
+      margin-left:25px;
+      font-size:0.95rem;
+    }
+
+    .hero{
+      height:90vh;
+      background:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1600') center/cover;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      color:white;
+    }
+
+    .hero-content{
+      background:rgba(0,0,0,0.35);
+      padding:40px;
+      border-radius:12px;
+      max-width:700px;
+    }
+
+    .hero h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:4rem;
+      margin-bottom:15px;
+    }
+
+    .hero p{
+      margin-bottom:25px;
+      font-size:1.1rem;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 28px;
+      background:white;
+      color:black;
+      text-decoration:none;
+      border-radius:30px;
+      font-weight:500;
+    }
+
+    .section{
+      padding:80px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.8rem;
+      margin-bottom:40px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:white;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 4px 15px rgba(0,0,0,0.06);
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+    }
+
+    .card img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:20px;
+    }
+
+    .card h3{
+      margin-bottom:10px;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px 20px;
+      background:white;
+      border-top:1px solid #eee;
+    }
+
+    @media(max-width:768px){
+
+      nav{
+        display:none;
+      }
+
+      .hero h1{
+        font-size:2.8rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">Falviro</div>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Outfits</a>
+    <a href="#">Trends</a>
+    <a href="#">Accessories</a>
+    <a href="#">Contact</a>
+  </nav>
+
+</header>
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>Elegant Fashion Inspiration</h1>
+
+    <p>
+      Discover timeless outfit ideas, feminine aesthetics, and curated fashion inspiration.
+    </p>
+
+    <a href="#" class="btn">Explore Style</a>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2 class="section-title">Trending Style Inspiration</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200">
+
+      <div class="card-content">
+        <h3>Elegant Summer Looks</h3>
+        <p>Soft feminine outfit inspiration perfect for warm weather fashion.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1200">
+
+      <div class="card-content">
+        <h3>Minimalist Neutral Fashion</h3>
+        <p>Luxury-inspired neutral outfits with timeless styling aesthetics.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200">
+
+      <div class="card-content">
+        <h3>Travel Outfit Inspiration</h3>
+        <p>Classy and comfortable looks for modern travel styling.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <p>© 2026 Falviro — Fashion Inspiration & Style Trends</p>
+
+</footer>
+
+</body>
+</html>
