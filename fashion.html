@@ -10,7 +10,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
 
@@ -22,8 +22,9 @@
 
         body{
             font-family:'Inter',sans-serif;
-            background:#f7f3ef;
-            color:#1d1d1d;
+            background:#f8f4ef;
+            color:#181818;
+            overflow-x:hidden;
         }
 
         img{
@@ -42,7 +43,7 @@
             top:0;
             left:0;
             z-index:1000;
-            padding:26px 8%;
+            padding:28px 8%;
             display:flex;
             justify-content:space-between;
             align-items:center;
@@ -52,9 +53,9 @@
         }
 
         .logo{
-            font-size:54px;
+            font-size:56px;
             font-family:'Playfair Display',serif;
-            font-weight:700;
+            font-weight:800;
             letter-spacing:1px;
         }
 
@@ -73,174 +74,262 @@
         }
 
         .hero{
-            width:100%;
             min-height:100vh;
-            padding:160px 8% 80px;
+            padding:150px 8% 100px;
         }
 
-        .fashion-badge{
-            width:fit-content;
-            margin-bottom:30px;
-            padding:14px 28px;
-            border-radius:50px;
-            background:#e7ddd1;
-            color:#8f6f45;
-            font-size:15px;
-        }
-
-        .fashion-hero-grid{
+        .hero-layout{
             display:grid;
-            grid-template-columns:1fr 1fr;
+            grid-template-columns:1.1fr 0.9fr;
             gap:70px;
             align-items:center;
         }
 
-        .fashion-text h1{
-            font-size:96px;
-            line-height:0.95;
-            font-family:'Playfair Display',serif;
+        .mini-tag{
+            width:fit-content;
+            padding:14px 26px;
+            border-radius:50px;
+            background:#ece1d4;
+            color:#926d42;
+            font-size:14px;
             margin-bottom:28px;
+            letter-spacing:1px;
         }
 
-        .fashion-text p{
+        .hero-text h1{
+            font-size:110px;
+            line-height:0.92;
+            font-family:'Playfair Display',serif;
+            margin-bottom:34px;
+        }
+
+        .hero-text p{
             font-size:24px;
-            line-height:1.8;
-            color:#5e5e5e;
-            margin-bottom:38px;
+            line-height:1.9;
+            color:#5f5f5f;
             max-width:720px;
+            margin-bottom:42px;
         }
 
-        .fashion-buttons{
+        .hero-buttons{
             display:flex;
             gap:18px;
         }
 
         .dark-btn{
-            background:#111;
+            background:#121212;
             color:white;
-            padding:18px 34px;
+            padding:20px 36px;
             border-radius:50px;
             font-weight:600;
         }
 
         .light-btn{
             background:white;
-            color:#111;
-            padding:18px 34px;
+            padding:20px 36px;
             border-radius:50px;
             border:1px solid rgba(0,0,0,0.08);
             font-weight:600;
         }
 
-        .fashion-image-panel{
+        .hero-visual{
             position:relative;
         }
 
-        .fashion-image-panel img{
-            height:760px;
+        .main-image{
+            height:820px;
             object-fit:cover;
-            border-radius:34px;
+            border-radius:40px;
         }
 
-        .fashion-floating-card{
+        .floating-box{
             position:absolute;
             left:-40px;
-            bottom:40px;
+            bottom:50px;
+            width:290px;
             background:white;
-            padding:32px;
-            width:280px;
-            border-radius:28px;
-            box-shadow:0 15px 40px rgba(0,0,0,0.08);
+            padding:34px;
+            border-radius:30px;
+            box-shadow:0 18px 40px rgba(0,0,0,0.09);
         }
 
-        .fashion-floating-card h3{
-            font-size:32px;
-            margin-bottom:16px;
+        .floating-box h3{
+            font-size:34px;
             font-family:'Playfair Display',serif;
+            margin-bottom:16px;
         }
 
-        .fashion-floating-card p{
+        .floating-box p{
             line-height:1.8;
             color:#666;
         }
 
-        .cards-section{
+        .floating-number{
+            position:absolute;
+            top:-30px;
+            right:-20px;
+            width:120px;
+            height:120px;
+            border-radius:50%;
+            background:#111;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+        }
+
+        .floating-number h2{
+            font-size:34px;
+        }
+
+        .floating-number span{
+            font-size:13px;
+            opacity:0.7;
+        }
+
+        .featured{
             padding:40px 8% 120px;
         }
 
-        .section-title{
-            font-size:74px;
-            font-family:'Playfair Display',serif;
+        .section-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:end;
             margin-bottom:60px;
+            gap:40px;
         }
 
-        .cards-grid{
+        .section-top h2{
+            font-size:72px;
+            line-height:1;
+            font-family:'Playfair Display',serif;
+        }
+
+        .section-top p{
+            max-width:520px;
+            color:#666;
+            line-height:1.9;
+            font-size:20px;
+        }
+
+        .fashion-grid{
             display:grid;
             grid-template-columns:repeat(3,1fr);
-            gap:34px;
+            gap:32px;
         }
 
-        .card{
+        .fashion-card{
             background:white;
-            border-radius:30px;
+            border-radius:34px;
             overflow:hidden;
+            transition:0.4s;
         }
 
-        .card img{
-            height:420px;
+        .fashion-card:hover{
+            transform:translateY(-10px);
+        }
+
+        .fashion-card img{
+            height:450px;
             object-fit:cover;
         }
 
-        .card-content{
-            padding:36px;
+        .card-info{
+            padding:34px;
         }
 
-        .card span{
-            color:#a67b4f;
+        .card-info span{
+            color:#aa7b49;
             font-size:14px;
             letter-spacing:2px;
         }
 
-        .card h3{
+        .card-info h3{
             font-size:52px;
-            line-height:1.05;
-            margin:20px 0;
+            line-height:1;
+            margin:22px 0;
             font-family:'Playfair Display',serif;
         }
 
-        .card p{
+        .card-info p{
             color:#666;
             line-height:1.8;
             margin-bottom:24px;
-            font-size:20px;
+            font-size:19px;
         }
 
-        .card a{
+        .card-info a{
             font-weight:700;
+            font-size:19px;
+        }
+
+        .editorial{
+            margin:0 8% 120px;
+            background:#111;
+            border-radius:44px;
+            overflow:hidden;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+        }
+
+        .editorial img{
+            height:100%;
+            object-fit:cover;
+        }
+
+        .editorial-content{
+            padding:80px;
+            color:white;
+            display:flex;
+            justify-content:center;
+            flex-direction:column;
+        }
+
+        .editorial-content span{
+            color:#d9b57f;
+            letter-spacing:2px;
+            margin-bottom:20px;
+        }
+
+        .editorial-content h2{
+            font-size:72px;
+            line-height:0.98;
+            font-family:'Playfair Display',serif;
+            margin-bottom:28px;
+        }
+
+        .editorial-content p{
+            color:#cfcfcf;
+            line-height:1.9;
             font-size:20px;
+            margin-bottom:36px;
         }
 
         .newsletter{
-            margin:0 8% 120px;
-            background:#0c0c0c;
-            color:white;
-            padding:90px 60px;
+            padding:0 8% 120px;
+        }
+
+        .newsletter-box{
+            background:#f0e7dc;
             border-radius:40px;
+            padding:80px;
             text-align:center;
         }
 
-        .newsletter h2{
-            font-size:72px;
+        .newsletter-box h2{
+            font-size:74px;
+            line-height:1;
             font-family:'Playfair Display',serif;
             margin-bottom:24px;
         }
 
-        .newsletter p{
-            max-width:850px;
+        .newsletter-box p{
+            max-width:820px;
             margin:auto;
-            line-height:1.8;
-            color:#cfcfcf;
-            font-size:22px;
+            line-height:1.9;
+            color:#666;
+            font-size:20px;
         }
 
         .newsletter-form{
@@ -262,11 +351,11 @@
             padding:22px 34px;
             border:none;
             border-radius:50px;
-            background:#d5b27b;
+            background:#111;
             color:white;
             font-weight:700;
-            font-size:18px;
             cursor:pointer;
+            font-size:18px;
         }
 
         footer{
@@ -278,27 +367,40 @@
 
         @media(max-width:1100px){
 
-            .fashion-hero-grid{
+            .hero-layout{
                 grid-template-columns:1fr;
             }
 
-            .cards-grid{
+            .fashion-grid{
                 grid-template-columns:1fr;
             }
 
-            .fashion-text h1{
-                font-size:70px;
+            .editorial{
+                grid-template-columns:1fr;
             }
 
-            .section-title{
+            .hero-text h1{
+                font-size:72px;
+            }
+
+            .section-top{
+                flex-direction:column;
+                align-items:start;
+            }
+
+            .section-top h2{
                 font-size:52px;
             }
 
-            .card h3{
+            .card-info h3{
                 font-size:40px;
             }
 
-            .newsletter h2{
+            .editorial-content h2{
+                font-size:52px;
+            }
+
+            .newsletter-box h2{
                 font-size:52px;
             }
 
@@ -325,46 +427,56 @@
 
     <section class="hero">
 
-        <div class="fashion-badge">
-            Luxury Fashion • Feminine Style • Modern Elegance
-        </div>
+        <div class="hero-layout">
 
-        <div class="fashion-hero-grid">
+            <div class="hero-text">
 
-            <div class="fashion-text">
+                <div class="mini-tag">
+                    Modern Luxury • Feminine Fashion • Editorial Style
+                </div>
 
                 <h1>
-                    Modern Fashion
-                    Inspiration
+                    Fashion That
+                    Speaks
+                    Elegance
                 </h1>
 
                 <p>
-                    Explore curated feminine aesthetics, elegant outfit ideas,
-                    luxury seasonal trends, and timeless modern fashion inspiration.
+                    Discover elevated feminine aesthetics, timeless luxury inspiration,
+                    modern silhouettes, and curated editorial fashion stories for women
+                    who love sophisticated style.
                 </p>
 
-                <div class="fashion-buttons">
+                <div class="hero-buttons">
 
-                    <a href="#" class="dark-btn">Explore Trends</a>
+                    <a href="#" class="dark-btn">Explore Fashion</a>
 
-                    <a href="#" class="light-btn">Style Journal</a>
+                    <a href="#" class="light-btn">View Editorial</a>
 
                 </div>
 
             </div>
 
-            <div class="fashion-image-panel">
+            <div class="hero-visual">
 
-                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1200&auto=format&fit=crop">
+                <img class="main-image" src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop">
 
-                <div class="fashion-floating-card">
+                <div class="floating-box">
 
-                    <h3>Trending Looks</h3>
+                    <h3>Style Forecast</h3>
 
                     <p>
-                        Soft luxury palettes, feminine silhouettes,
-                        elevated basics, and modern Parisian styling.
+                        Neutral layering, elegant tailoring,
+                        clean luxury palettes, and elevated femininity dominate this season.
                     </p>
+
+                </div>
+
+                <div class="floating-number">
+
+                    <h2>2026</h2>
+
+                    <span>TREND EDIT</span>
 
                 </div>
 
@@ -374,44 +486,56 @@
 
     </section>
 
-    <section class="cards-section">
+    <section class="featured">
 
-        <h2 class="section-title">Featured Looks</h2>
+        <div class="section-top">
 
-        <div class="cards-grid">
+            <h2>
+                Curated
+                Fashion Stories
+            </h2>
 
-            <div class="card">
+            <p>
+                Explore luxury aesthetics, seasonal outfit inspiration,
+                minimalist wardrobe ideas, and elegant editorial fashion collections.
+            </p>
 
-                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1200&auto=format&fit=crop">
+        </div>
 
-                <div class="card-content">
+        <div class="fashion-grid">
 
-                    <span>SUMMER STYLE</span>
+            <div class="fashion-card">
 
-                    <h3>Elegant Coastal Looks</h3>
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="card-info">
+
+                    <span>SOFT LUXURY</span>
+
+                    <h3>Neutral Feminine Layers</h3>
 
                     <p>
-                        Chic feminine outfits inspired by luxury Mediterranean vacations.
+                        Timeless soft-tone fashion inspiration blending elegance and simplicity.
                     </p>
 
-                    <a href="#">Read More →</a>
+                    <a href="#">Read Story →</a>
 
                 </div>
 
             </div>
 
-            <div class="card">
+            <div class="fashion-card">
 
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1495385794356-15371f348c31?q=80&w=1200&auto=format&fit=crop">
 
-                <div class="card-content">
+                <div class="card-info">
 
-                    <span>MINIMAL LUXURY</span>
+                    <span>EDITORIAL STYLE</span>
 
-                    <h3>Neutral Wardrobe Staples</h3>
+                    <h3>Luxury Street Looks</h3>
 
                     <p>
-                        Timeless fashion essentials blending elegance, comfort, and sophistication.
+                        Sophisticated modern styling inspired by Parisian and Milan fashion culture.
                     </p>
 
                     <a href="#">Explore Looks →</a>
@@ -420,21 +544,21 @@
 
             </div>
 
-            <div class="card">
+            <div class="fashion-card">
 
-                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop">
 
-                <div class="card-content">
+                <div class="card-info">
 
-                    <span>EUROPEAN AESTHETIC</span>
+                    <span>MINIMAL AESTHETIC</span>
 
-                    <h3>Paris Inspired Fashion</h3>
+                    <h3>Elegant Capsule Wardrobe</h3>
 
                     <p>
-                        Sophisticated street-style inspiration mixing luxury fashion with femininity.
+                        Elevated essentials and clean silhouettes for timeless everyday fashion.
                     </p>
 
-                    <a href="#">View Trends →</a>
+                    <a href="#">View Collection →</a>
 
                 </div>
 
@@ -444,20 +568,52 @@
 
     </section>
 
+    <section class="editorial">
+
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="editorial-content">
+
+            <span>EDITORIAL FEATURE</span>
+
+            <h2>
+                The Rise Of
+                Quiet Luxury
+            </h2>
+
+            <p>
+                Minimal elegance, refined tailoring, muted palettes,
+                and elevated simplicity continue shaping modern feminine fashion.
+            </p>
+
+            <a href="#" class="dark-btn">Read Editorial</a>
+
+        </div>
+
+    </section>
+
     <section class="newsletter">
 
-        <h2>Join The Falviro Journal</h2>
+        <div class="newsletter-box">
 
-        <p>
-            Receive curated fashion inspiration, luxury lifestyle trends,
-            aesthetic outfit ideas, and seasonal styling guides every week.
-        </p>
+            <h2>
+                Join The
+                Falviro Journal
+            </h2>
 
-        <div class="newsletter-form">
+            <p>
+                Receive curated luxury fashion inspiration,
+                feminine styling guides, modern outfit trends,
+                and editorial fashion stories every week.
+            </p>
 
-            <input type="email" placeholder="Enter your email">
+            <div class="newsletter-form">
 
-            <button>Subscribe</button>
+                <input type="email" placeholder="Enter your email">
+
+                <button>Subscribe</button>
+
+            </div>
 
         </div>
 
