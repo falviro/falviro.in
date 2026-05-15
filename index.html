@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FALVIRO | Editorial Fashion & Inspiration Collective</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            bg: "#fdfbf7",       /* Warm Ivory Canvas */
+                            cream: "#f7f4eb",    /* Neutral Cream Structural Panels */
+                            beige: "#f1ece1",    /* Soft Editorial Beige Accent */
+                            taupe: "#d9d2c5",    /* Muted Classic Taupe */
+                            mocha: "#8c8275",    /* Mid-Tone Soft Mocha Texturing */
+                            charcoal: "#1c1a17"  /* High-Contrast Soft Dark Contrast */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        editorial: '0.15em',
+                        vogue: '0.25em',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #fdfbf7;
+            color: #1c1a17;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="selection:bg-[#f1ece1] selection:text-[#1c1a17]">
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Custom High-End Dynamic Scroll Animation Engine Simulation 
+        // Replicates Framer Motion Viewport Intersections natively via standard Browser Intersection Observers
+        function useScrollReveal() {
+            useEffect(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('opacity-0', 'translate-y-8');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }
+                    });
+                }, { threshold: 0.05 });
+
+                document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+                return () => observer.disconnect();
+            }, []);
+        }
+
+        // --- Core Shared Functional Components ---
+
+        function Navbar({ currentTab, setCurrentTab }) {
+            const [isOpen, setIsOpen] = useState(false);
+            const menuItems = ['Home', 'Trending', 'Store', 'Shop', 'Connect'];
+
+            return (
+                <nav className="fixed top-0 left-0 w-full z-50 bg-luxury-bg/80 backdrop-blur-md border-b border-luxury-beige/40 transition-all duration-300">
+                    <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+                        <a href="#" onClick={() => setCurrentTab('Home')} className="font-serif text-2xl tracking-vogue uppercase font-semibold">
+                            Falviro
+                        </a>
+
+                        {/* Desktop Navigation Link Array */}
+                        <div className="hidden md:flex items-center space-x-10">
+                            {menuItems.map((item) => (
+                                <button 
+                                    key={item} 
+                                    onClick={() => setCurrentTab(item)}
+                                    className={`relative font-sans text-xs uppercase tracking-editorial pb-1 transition-colors duration-300 ${
+                                        currentTab === item ? 'text-luxury-charcoal font-medium' : 'text-luxury-mocha hover:text-luxury-charcoal'
+                                    }`}
+                                >
+                                    {item}
+                                    {currentTab === item && (
+                                        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-luxury-mocha" />
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="hidden md:block">
+                            <button 
+                                onClick={() => setCurrentTab('Trending')}
+                                className="border border-luxury-charcoal px-6 py-2.5 text-xs uppercase tracking-editorial font-medium hover:bg-luxury-charcoal hover:text-luxury-bg transition-all duration-300"
+                            >
+                                Explore Trends
+                            </button>
+                        </div>
+
+                        {/* Mobile Device Adaptive Control Toggle */}
+                        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden flex flex-col justify-center items-center w-6 h-6 gap-1.5 focus:outline-none">
+                            <span className={`w-6 h-[1px] bg-luxury-charcoal transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+                            <span className={`w-6 h-[1px] bg-luxury-charcoal transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+                            <span className={`w-6 h-[1px] bg-luxury-charcoal transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+                        </button>
+                    </div>
+
+                    {/* Mobile Full Screen Panel Overlays */}
+                    {isOpen && (
+                        <div className="absolute top-20 left-0 w-full bg-luxury-bg border-b border-luxury-beige px-6 py-8 flex flex-col space-y-6 shadow-xl md:hidden">
+                            {menuItems.map((item) => (
+                                <button key={item} onClick={() => { setCurrentTab(item); setIsOpen(false); }} className="font-serif text-xl text-left tracking-wide text-luxury-charcoal">
+                                    {item}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </nav>
+            );
+        }
+
+        function Newsletter() {
+            return (
+                <section className="reveal-on-scroll transform transition-all duration-1000 ease-out opacity-0 translate-y-8 bg-luxury-cream py-24 px-6 border-t border-luxury-beige/50">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <span className="font-sans text-xs uppercase tracking-vogue text-luxury-mocha block mb-4">The Inner Circle</span>
+                        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light mb-6 tracking-wide">Subscribe to the Style Journal</h2>
+                        <p className="font-sans text-sm text-luxury-mocha max-w-lg mx-auto mb-10 leading-relaxed font-light">
+                            Weekly curations of low-profile luxury aesthetics, seasonal moodboards, and exclusive item tracking straight to your inbox.
+                        </p>
+                        <form onSubmit={(e) => { e.preventDefault(); alert("Successfully added to the system."); }} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                            <input type="email" placeholder="Enter your email address" required className="flex-grow bg-luxury-bg border border-luxury-taupe/60 px-4 py-3 text-sm focus:outline-none focus:border-luxury-mocha font-light text-luxury-charcoal tracking-wide placeholder:text-luxury-mocha/50" />
+                            <button type="submit" class="bg-luxury-charcoal text-luxury-bg px-8 py-3 text-xs uppercase tracking-editorial font-medium hover:bg-luxury-mocha transition-colors duration-300 whitespace-nowrap">Join Registry</button>
+                        </form>
+                    </div>
+                </section>
+            );
+        }
+
+        function Footer({ setCurrentTab }) {
+            return (
+                <footer className="bg-luxury-bg border-t border-luxury-beige py-16 px-6">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                        <div className="md:col-span-2 space-y-4">
+                          <span className="font-serif text-xl tracking-vogue uppercase font-semibold">Falviro</span>
+                          <p className="font-sans text-xs text-luxury-mocha max-w-sm font-light leading-relaxed">
+                            A luxury editorial curation engineered for minimal style expression, outfit diagnostics, and premium wardrobe design.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-sans text-xs uppercase tracking-editorial text-luxury-charcoal font-semibold mb-4">Navigation</h4>
+                          <ul className="space-y-2 text-xs font-light text-luxury-mocha">
+                            <li><button onClick={() => setCurrentTab('Home')} className="hover:text-luxury-charcoal">Home Overview</button></li>
+                            <li><button onClick={() => setCurrentTab('Trending')} className="hover:text-luxury-charcoal">Trending Moods</button></li>
+                            <li><button onClick={() => setCurrentTab('Store')} className="hover:text-luxury-charcoal">Curated Store</button></li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-sans text-xs uppercase tracking-editorial text-luxury-charcoal font-semibold mb-4">Social Architecture</h4>
+                          <ul className="space-y-2 text-xs font-light text-luxury-mocha">
+                            <li><a href="#" className="hover:text-luxury-charcoal">Pinterest Workspace</a></li>
+                            <li><a href="#" className="hover:text-luxury-charcoal">Instagram Feed</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div className="max-w-7xl mx-auto pt-8 border-t border-luxury-beige/40 flex flex-col sm:flex-row justify-between items-center text-[10px] uppercase tracking-vogue text-luxury-mocha/70">
+                        <p>&copy; 2026 FALVIRO Collective. All rights reserved.</p>
+                        <p>Vogue Aesthetic × Pinterest Curated</p>
+                    </div>
+                </footer>
+            );
+        }
+
+        // --- Core Component Screens Layer ---
+
+        function HomePage({ setCurrentTab }) {
+            useScrollReveal();
+
+            return (
+                <div className="space-y-24 animate-fade-in">
+                    {/* Immersive Editorial Hero Segment */}
+                    <header className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[calc(100vh-80px)] py-12">
+                        <div className="lg:col-span-5 space-y-8 transition-all duration-1000 transform translate-y-0 opacity-100">
+                            <span className="text-xs font-sans uppercase tracking-vogue text-luxury-mocha block">Spring / Summer 2026 Collection</span>
+                            <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-light tracking-tight leading-[1.1]">
+                                The Art of <br />
+                                <span className="italic font-normal text-luxury-mocha">Minimalist</span> <br />
+                                Symmetry
+                            </h1>
+                            <p className="font-sans text-sm text-luxury-mocha font-light max-w-sm leading-relaxed">
+                                A cohesive collection mapping effortless structural lines and monochromatic neutral elements tailored for daily composition.
+                            </p>
+                            <div>
+                                <button onClick={() => setCurrentTab('Trending')} className="inline-block bg-luxury-charcoal text-luxury-bg text-xs font-semibold uppercase tracking-editorial px-8 py-4 hover:bg-luxury-mocha transition-colors duration-300">
+                                    Discover The Lookbook
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Floating Organic Interaction Frame Layout */}
+                        <div className="lg:col-span-7 grid grid-cols-12 gap-4 relative mt-8 lg:mt-0">
+                            <div className="col-span-8 overflow-hidden rounded-t-[120px] aspect-[3/4] bg-luxury-beige shadow-sm relative">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop" 
+                                    alt="Luxury Outfit Aesthetic" 
+                                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700 ease-out"
+                                />
+                            </div>
+                            <div className="col-span-4 self-end overflow-hidden rounded-full aspect-square bg-luxury-cream shadow-md relative -left-10 bottom-10 hidden sm:block animate-bounce-slow">
+                                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600&auto=format&fit=crop" alt="Tailoring Micro-Detail" className="w-full h-full object-cover scale-110" />
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Pinterest Grid Direction Section */}
+                    <section className="max-w-7xl mx-auto px-6 py-12 reveal-on-scroll transform transition-all duration-1000 ease-out opacity-0 translate-y-8">
+                        <div className="flex flex-col sm:flex-row justify-between items-baseline mb-12 border-b border-luxury-beige pb-4">
+                            <h2 className="font-serif text-3xl font-light tracking-wide">Seasonal Directions</h2>
+                            <button onClick={() => setCurrentTab('Trending')} className="text-xs uppercase tracking-editorial font-medium text-luxury-mocha hover:text-luxury-charcoal transition-colors">
+                                View All Journals &rarr;
+                            </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {[
+                                { tag: "Old Money Aesthetic", title: "Tailored Linen & Neutral Monochromes", img: "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=600&auto=format&fit=crop" },
+                                { tag: "Office Chic", title: "The Modern Blazer Structure Handbook", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=600&auto=format&fit=crop" },
+                                { tag: "Vacation Luxe", title: "Soft Textures Designed for Coastal Escape", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600&auto=format&fit=crop" }
+                            ].map((item, index) => (
+                                <div key={index} onClick={() => setCurrentTab('Trending')} className="group cursor-pointer space-y-4 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <div className="overflow-hidden bg-luxury-cream aspect-[4/5] rounded-lg shadow-sm">
+                                        <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <span className="text-[10px] font-sans uppercase tracking-vogue text-luxury-mocha">{item.tag}</span>
+                                        <h3 className="font-serif text-lg text-luxury-charcoal group-hover:text-luxury-mocha transition-colors">{item.title}</h3>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <Newsletter />
+                </div>
+            );
+        }
+
+        function TrendingPage() {
+            const categories = ["All Lookbooks", "Summer", "Winter", "Old Money", "Minimal", "Luxury", "Korean Fashion", "Airport", "Vacation", "Travel", "Beach", "Office Chic", "Casual Luxury"];
+            const lookbooks = [
+                { id: 1, title: "The Silk Maxi Silhouette", tags: ["Minimal", "Summer", "Vacation"], img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" },
+                { id: 2, title: "Classic Wool Overcoat Layering", tags: ["Winter", "Luxury", "Old Money"], img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600&auto=format&fit=crop" },
+                { id: 3, title: "Relaxed Tailored Linen Composition", tags: ["Old Money", "Summer", "Travel"], img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=600&auto=format&fit=crop" },
+                { id: 4, title: "Monochrome Oversized Knits", tags: ["Minimal", "Winter", "Casual Luxury"], img: "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=600&auto=format&fit=crop" },
+                { id: 5, title: "Deconstructed Workwear Set", tags: ["Office Chic", "Minimal"], img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600&auto=format&fit=crop" },
+                { id: 6, title: "Structured Airport Neutral Set", tags: ["Airport", "Travel", "Casual Luxury"], img: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=600&auto=format&fit=crop" }
+            ];
+
+            const [selectedTag, setSelectedTag] = useState("All Lookbooks");
+            const [search, setSearch] = useState("");
+
+            const filteredData = lookbooks.filter(item => {
+                const matchTag = selectedTag === "All Lookbooks" || item.tags.includes(selectedTag);
+                const matchSearch = item.title.toLowerCase().includes(search.toLowerCase()) || item.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
+                return matchTag && matchSearch;
+            });
+
+            return (
+                <div className="space-y-16 py-6">
+                    {/* Large Magazine-Style Hero Banner Block */}
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="relative bg-luxury-cream h-[35vh] md:h-[45vh] rounded-2xl overflow-hidden flex items-center justify-center shadow-inner">
+                            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600')] bg-cover bg-center opacity-10 filter grayscale mix-blend-multiply" />
+                            <div className="relative z-10 text-center space-y-3">
+                                <span className="text-xs uppercase tracking-vogue text-luxury-mocha block font-medium">Style Tracker & Mood Index</span>
+                                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-luxury-charcoal">Trending Aesthetics</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Integrated Analytics Search Panel */}
+                    <div className="max-w-7xl mx-auto px-6 space-y-8">
+                        <div className="max-w-md mx-auto">
+                            <input 
+                                type="text"
+                                placeholder="Search trend, season, or aesthetic..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full bg-luxury-bg border-b border-luxury-taupe/80 py-3 text-sm focus:outline-none focus:border-luxury-charcoal font-light text-luxury-charcoal tracking-wide placeholder:text-luxury-mocha/40 text-center"
+                            />
+                        </div>
+
+                        {/* Category Pill Registry Navigation Matrix */}
+                        <div className="flex overflow-x-auto pb-4 gap-3 no-scrollbar justify-start md:justify-center">
+                            {categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setSelectedTag(cat)}
+                                    className={`px-5 py-2 text-xs uppercase tracking-editorial rounded-full transition-all duration-300 ${
+                                        selectedTag === cat ? 'bg-luxury-charcoal text-luxury-bg font-medium' : 'bg-luxury-cream text-luxury-mocha hover:bg-luxury-beige'
+                                    }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Highly Converting Pinterest Waterfall Product Feed Grid */}
+                    <div className="max-w-7xl mx-auto px-6 min-h-[400px]">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {filteredData.map(look => (
+                                <article key={look.id} className="bg-luxury-bg border border-luxury-beige/60 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 group">
+                                    <div className="overflow-hidden rounded-lg bg-luxury-cream aspect-[3/4]">
+                                        <img src={look.img} alt={look.title} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-102" />
+                                    </div>
+                                    <div className="pt-4 space-y-3">
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {look.tags.map(t => (
+                                                <span key={t} className="text-[9px] font-sans uppercase tracking-wide px-2 py-0.5 bg-luxury-cream text-luxury-mocha rounded">{t}</span>
+                                            ))}
+                                        </div>
+                                        <h3 className="font-serif text-lg text-luxury-charcoal leading-snug">{look.title}</h3>
+                                        <a href="#" onClick={(e) => { e.preventDefault(); alert("Redirecting to Amazon Affiliate Portal..."); }} className="block text-center border border-luxury-taupe/40 py-2.5 text-xs uppercase tracking-editorial text-luxury-charcoal font-medium hover:bg-luxury-charcoal hover:text-luxury-bg transition-all duration-300 rounded-sm">
+                                            Shop The Look
+                                        </a>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                        {filteredData.length === 0 && (
+                            <div className="text-center py-20 font-serif italic text-luxury-mocha">No curated lookbooks match your active filters.</div>
+                        )}
+                    </div>
+
+                    <Newsletter />
+                </div>
+            );
+        }
+
+        // --- Master App Central Controller ---
+
+        function App() {
+            const [currentTab, setCurrentTab] = useState('Home');
+
+            return (
+                <div className="min-h-screen flex flex-col justify-between">
+                    <Navbar currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <main className="pt-20 flex-grow">
+                        {currentTab === 'Home' && <HomePage setCurrentTab={setCurrentTab} />}
+                        {currentTab === 'Trending' && <TrendingPage />}
+                        {['Store', 'Shop', 'Connect'].includes(currentTab) && (
+                            <div className="max-w-7xl mx-auto px-6 py-32 text-center space-y-4">
+                                <h1 className="font-serif text-4xl font-light">{currentTab} Module</h1>
+                                <p className="text-sm text-luxury-mocha font-light">Integration architecture online. Fine-tuning tracking analytics pipelines for Pinterest traffic links.</p>
+                                <button onClick={() => setCurrentTab('Home')} className="text-xs uppercase tracking-editorial text-luxury-charcoal underline">Return to Main View</button>
+                            </div>
+                        )}
+                    </main>
+                    <Footer setCurrentTab={setCurrentTab} />
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
